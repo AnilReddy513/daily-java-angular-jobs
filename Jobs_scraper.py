@@ -196,7 +196,7 @@ def send_email(subject, html_body):
     server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
     server.sendmail(GMAIL_USER, RECIPIENT_EMAIL, msg.as_string())
     server.quit()
-
+print("Email sent successfully")
 # ----------- MAIN -------------
 
 def main():
