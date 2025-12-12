@@ -2,14 +2,12 @@ name: Daily Java+Angular Job Digest
 
 on:
   schedule:
-    # Runs at 06:30 UTC = 12:00 PM IST
     - cron: "30 6 * * *"
   workflow_dispatch: {}
 
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -32,3 +30,10 @@ jobs:
           EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
         run: |
           python jobs_scraper.py
+
+      - name: Upload last_email.html (if created)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: last-email
+          path: last_email.html
